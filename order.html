@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order Now - The Hunger Grill</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="light-mode">
+<header>
+<nav>
+<h1>The Hunger Grill</h1>
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="#order">Order Now</a></li>
+</ul>
+<button id="themeToggle">Switch Theme</button>
+</nav>
+</header>
+<main>
+<section id="order">
+<div class="container">
+<h2>Place Your Order</h2>
+<form id="orderForm">
+<label for="name">Your Name:</label>
+<input type="text" id="name" placeholder="Enter your name" required />
+ <label for="meal">Select Meal:</label>
+ <select id="meal" required>
+ <option value="burger">Burger</option>
+<option value="pizza">Pizza</option>
+ <option value="cold_drink">Cold Drink</option>
+ <option value="ice_cream">Ice Cream</option>
+ </select>
+<label for="quantity">Quantity:</label>
+<input type="number" id="quantity" min="1" placeholder="Enter quantity" required />
+<label for="address">Delivery Address:</label>
+<textarea id="address" placeholder="Enter your address" required></textarea>
+<button type="submit" class="cta-button">Submit Order</button>
+ </form>
+</div>
+</section>
+</main>
+<footer>
+<p>&copy; 2024 TheHungerGrill. All rights reserved.</p>
+</footer>
+<script>
+const themeToggle = document.getElementById("themeToggle");
+const savedTheme = localStorage.getItem("theme") || "light";
+ function applyTheme(theme) {
+ if (theme === "dark") {
+ document.body.classList.add("dark-mode");
+  document.body.classList.remove("light-mode");
+ } else {
+ document.body.classList.add("light-mode");
+ document.body.classList.remove("dark-mode");
+ }
+}
+applyTheme(savedTheme);
+themeToggle.addEventListener("click", () => {
+const newTheme = document.body.classList.contains("dark-mode") ? "light" : "dark";
+localStorage.setItem("theme", newTheme);
+applyTheme(newTheme);
+});
+const orderForm = document.getElementById("orderForm");
+orderForm.addEventListener("submit", function (e) {
+ e.preventDefault();
+ const name = document.getElementById("name").value;
+ const meal = document.getElementById("meal").value;
+ const quantity = document.getElementById("quantity").value;
+ const address = document.getElementById("address").value;
+ alert(
+`Thank you, ${name}!\nYour order for ${quantity} ${meal}(s) will be delivered to:\n${address}`
+);
+// Optionally clear form fields
+ orderForm.reset();
+});
+</script>
+</body>
+</html>
